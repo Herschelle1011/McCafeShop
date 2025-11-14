@@ -7,9 +7,6 @@
   height: .75em;
 }
 
-/*
- * Custom translucent site header
- */
 
 .site-header {
   background-color: rgba(0, 0, 0, .85);
@@ -28,9 +25,6 @@
   display: flex;
   gap: 20px;
 }
-/*
- * Dummy devices (replace them with your own or something else entirely!)
- */
 
 .product-device {
   position: absolute;
@@ -63,9 +57,7 @@
 }
 
 
-/*
- * Extra utilities
- */
+
 
 .flex-equal > * {
   flex: 1;
@@ -80,7 +72,7 @@
   background-image: url("https://static.vecteezy.com/system/resources/previews/035/382/878/large_2x/ai-generated-coffee-cup-on-the-table-free-photo.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
-  height: 833px;
+  height: 1000px;
 
 }
 
@@ -123,6 +115,11 @@ button{
   border: none !important;
   margin-right: 20px !important;
 }
+
+a{
+  text-decoration: none !important;
+
+}
 .order:hover{
   background-color: transparent !important;
   border: 2px solid white !important;
@@ -136,7 +133,69 @@ button{
 }
 
 .explore:hover{
-  background-color: rgb(207, 154, 55) !important;
-  border: none !important;
+   background-color: transparent !important;
+  border: 2px solid white !important;
   color: white;
+}
+
+@media (max-width: 992px) {
+
+
+
+  .container-text {
+    left: 50% !important;
+    top: 45% !important;
+    transform: translate(-50%, -50%) !important;
+    text-align: justify !important;
+    width: 90% !important;
+    margin-left: 25px;
+  }
+
+  h1 {
+    font-size: 60px !important;
+  }
+
+  p {
+    font-size: 20px !important;
+  }
+
+  button {
+    width: 60% !important;
+    margin: 8px 0 !important;
+    font-size: 16px !important;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .bg {
+    height: 600px !important;
+    background-position: center !important;
+  }
+
+  .container-text {
+    top: 50% !important;
+    width: 85% !important ;
+    left: 50% !important;
+  }
+
+  h1 {
+    font-size: 28px !important;
+  }
+
+  p {
+    font-size: 14px !important;
+  }
+
+  button {
+    width: 80% !important;
+    padding: 12px !important;
+    font-size: 14px !important;
+  }
+
+  .card-container {
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+  }
 }
