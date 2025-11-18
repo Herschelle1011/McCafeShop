@@ -1,11 +1,13 @@
 [
   {
     "id": 1,
+    
     "name": {
       "english": "McCafé® Mocha Frappe"
     },
     "category": ["Frappe"],
     "base": {
+            "availability" : ["out-of-stock"],
       "price": "119",
       "calories": "200 kcal",
       "reviews": "54"

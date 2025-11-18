@@ -340,6 +340,29 @@ box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30p
   margin-left: 20px;
 }
 
+.input-control.success input{
+    border-color: green !important;
+}
+
+.input-control.error input{
+    border-color: red !important;
+}
+
+.input-control .error{
+    color: red !important;
+    font-size: 9px;
+    height: 13px;
+}
+
+.input-control span{
+    color: red;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+
+
+
 
 
 

@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const listproducts = document.querySelector('#cards');
   let allProducts = [];
 
+
+
+
   const mcCafeBg = document.createElement('div');
   mcCafeBg.classList.add('mcCafe');
   mcCafeBg.textContent = 'McCafé';
@@ -25,11 +28,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const image = item.image.hires;
         const price = item.base.price;
         const calories = item.base.calories;
-        let availability = item.options.availability;
+        const availability = item.base.availability;
         const id = item.id;
 
-
         const size = item.options.size;
+
+        
+
 
         listproducts.innerHTML += `
           <div class="cards" style="width: 18rem;"> 
@@ -68,18 +73,24 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           </div>
         `;
-
-
-
-
-          const btn = document.getElementById(`btn-${id}`);
-            if (availability === "out of stock") {
+    
+       const btn = document.getElementById(`#btn-${id}`);
+            if (availability === "out-of-stock") {
                 btn.textContent = "Unavailable";
                 btn.disabled = true;
                 btn.style.opacity = "0.5";
+               }
+               else{
 
-      }
-    });
+               }
+     
+  
+    
+}
+
+  );
+      
+  
 
       setTimeout(() => {
         listproducts.style.opacity = '1';
@@ -87,6 +98,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 100);
     }, 200);
   }
+
+
 
 
 
@@ -122,6 +135,23 @@ window.updateSizeText = function(size, index, basePrice) {
   sizeElement.dataset.updatedPrice = newPrice;
 };
 
+
+const searchBar = document.getElementById("searchBar");
+searchBar.addEventListener("input", () => {
+
+    const searchText = searchBar.value.toLowerCase();
+    const filtered = allProducts.filter(product =>
+        product.name.english.toLowerCase().includes(searchText));
+       if(filtered.length === 0){
+      changeBackgroundText(searchText ? "NotFound" : "McCafé");
+      displayProducts(!filtered);
+    }
+    else{
+    displayProducts(filtered);
+    changeBackgroundText(searchText ? "Searching." : "McCafé");
+    }
+
+});
 
 
 
@@ -278,6 +308,7 @@ window.addEventListener('scroll', function() {
 });
 
 
+
 window.addEventListener("load", () => {
   const sections = document.querySelectorAll(".checkout-item");
 const nextButtons = document.querySelectorAll(".next-btn");
@@ -290,19 +321,132 @@ const nextButtons = document.querySelectorAll(".next-btn");
   const firstSection = document.getElementById("billing-section");
   if (firstSection) firstSection.classList.add("active");
 
+
+          //NEXT BUTTON IF TEXTBOX IS empty VALIDATION
   nextButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
+    btn.addEventListener("click", (e) => {
+      let isValid = true;
+
+      //text ERRORS popup
+let nameError = document.getElementById('name-error');
+const emailError = document.getElementById('email-error');
+const phoneError = document.getElementById('phone-error');
+const addressError = document.getElementById('address-error');
+const cityError = document.getElementById('city-error');
+const zipCodeError = document.getElementById('zipCode-error');
+ const bordername = document.getElementById('billing-name');
+          //for BORDERS style
+            const borderEmail = document.getElementById('billing-email-address');
+            const borderPhone = document.getElementById('billing-phone');
+            const borderAddress = document.getElementById('billing-address');
+            const borderCity = document.getElementById('billing-city');
+            const borderZipCode = document.getElementById('zip-code');
+        //for INPUT values
+  let InputEmail = document.getElementById('billing-email-address').value;
+  let InputPhone = document.getElementById('billing-phone').value;
+    let InputAddress = document.getElementById('billing-address').value;
+  let InputCity = document.getElementById('billing-city').value;
+  let InputZipCode = document.getElementById('zip-code').value;
+  let InputName = document.getElementById('billing-name').value;
+
+
+          //Name VALIDATION
+      if(InputName.trim() === '' ){
+              nameError.innerHTML = 'Name is required';
+        bordername.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+{
+          nameError.innerHTML = '';
+            bordername.style.border = "1px solid green";
+        isValid = true;
+  }
+
+
+          //EMAIL VALIDATION
+    if(InputEmail.trim() === '' ){
+        emailError.innerHTML = 'Email is required';
+        borderEmail.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+        {
+            emailError.innerHTML = '';
+            borderEmail.style.border = "1px solid green";
+        isValid = true;
+  }
+          //PHONE VALIDATION
+      if(InputPhone.trim() === '' ){
+        phoneError.innerHTML = 'Phone is required';
+        borderPhone.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+{
+             phoneError.innerHTML = '';
+            borderPhone.style.border = "1px solid green";
+        isValid = true;
+  }
+  //ADDRESS VALIDATION
+      if(InputAddress.trim() === '' ){
+        addressError.innerHTML = 'Address is required';
+        borderAddress.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+{
+           addressError.innerHTML = '';
+            borderAddress.style.border = "1px solid green";
+        isValid = true;
+  }
+
+        //CITY VALIDATION
+        if(InputCity.trim() === '' ){
+   cityError.innerHTML = 'City is required';
+        borderCity.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+{
+           cityError.innerHTML = '';
+            borderCity.style.border = "1px solid green";
+            isValid = true;
+  }
+
+      // ZIPCODE VALIDATION
+
+              if(InputZipCode.trim() === '' ){
+      zipCodeError.innerHTML = 'ZipCode is required';
+        borderZipCode.style.border = "1px solid red";
+        e.preventDefault();
+        isValid = false; return;
+  } 
+  else
+{
+      zipCodeError.innerHTML = '';
+            borderZipCode.style.border = "1px solid green";
+            isValid = true;
+  }
+
+
+
       const currentSection = btn.closest(".checkout-item");
       const nextSectionId = btn.getAttribute("data-next");
       const nextSection = document.getElementById(nextSectionId);
       const edit = document.getElementById("btn-edit")
 
-  let name = document.getElementById("billing-name").value;
-    let email = document.getElementById("billing-email-address").value;
-  let phone = document.getElementById("billing-phone").value;
-  let address = document.getElementById("billing-address").value;
-  let city = document.getElementById("billing-city").value;
-  let zipCode = document.getElementById("zip-code").value;
+  let name = document.getElementById("billing-name");
+    let email = document.getElementById("billing-email-address");
+  let phone = document.getElementById("billing-phone");
+  let address = document.getElementById("billing-address");
+  let city = document.getElementById("billing-city");
+  let zipCode = document.getElementById("zip-code");
 
 
       const shipName = document.getElementById("ship-Name");
@@ -310,19 +454,11 @@ const nextButtons = document.querySelectorAll(".next-btn");
       const shipNumber = document.getElementById("ship-no");
       
 
-      shipName.innerText = name;
-      shipAddress.innerText = address;
-      shipNumber.innerText = phone;
+      shipName.innerText = name.value;
+      shipAddress.innerText = address.value;
+      shipNumber.innerText = phone.value;
 
 
-
-
-
-//PROPER VALIDATION FOR BLOCK NEXT IF NOT FILLED UP
-if(name === "" || email === "" || phone === "" || address === "" || city === "" || zipCode === ""){
-alert("Please fill up all the form")
-return;
-};
 
       if (!nextSection) {
         console.error(`Section with id="${nextSectionId}" not found!`);
@@ -334,8 +470,20 @@ return;
        edit.classList.remove("active");
       nextSection.scrollIntoView({ behavior: "smooth" });
     });
+  
   });
 });
+
+
+
+
+
+
+
+
+
+
+
 
 
 // for SHOWING ALL COUNTRIES
@@ -544,35 +692,6 @@ document.getElementById("shipping").innerText = `₱${49}`;
     const modal = new bootstrap.Modal(document.getElementById("popup"));
     modal.show();
   });
-
-
-
-
-  
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
